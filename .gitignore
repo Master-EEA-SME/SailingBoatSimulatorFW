@@ -3,6 +3,7 @@
 !*.vhd
 !*.xdc
 !*.qsf
+!*.qpf
 !*.xpr
 !*/
 db
