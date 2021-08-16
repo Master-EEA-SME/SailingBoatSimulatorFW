@@ -1,0 +1,9 @@
+*
+!.gitignore
+!*.vhd
+!*.xdc
+!*.qsf
+!*.xpr
+!*/
+db
+VProj.*/
