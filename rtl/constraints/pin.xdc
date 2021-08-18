@@ -26,3 +26,12 @@ set_property PACKAGE_PIN H14 [get_ports {PinSw[0]}]
 set_property PACKAGE_PIN H18 [get_ports {PinSw[1]}]
 set_property PACKAGE_PIN G18 [get_ports {PinSw[2]}]
 set_property PACKAGE_PIN M5 [get_ports {PinSw[3]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {PinRGBLed*}]
+set_property PACKAGE_PIN F15 [get_ports {PinRGBLed[0]}]
+set_property PACKAGE_PIN G17 [get_ports {PinRGBLed[1]}]
+set_property PACKAGE_PIN J15 [get_ports {PinRGBLed[2]}]
+set_property PACKAGE_PIN E14 [get_ports {PinRGBLed[3]}]
+set_property PACKAGE_PIN E15 [get_ports {PinRGBLed[4]}]
+set_property PACKAGE_PIN F18 [get_ports {PinRGBLed[5]}]
+

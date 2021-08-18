@@ -43,5 +43,8 @@ package XtrDef is
         Full    : std_logic;
         Busy    : std_logic;
     end record XtrDmaRsp_t;
+
+    type vXtrCmd_t is array (natural range <>) of XtrCmd_t;
+    type vXtrRsp_t is array (natural range <>) of XtrRsp_t;
     
 end package XtrDef;
