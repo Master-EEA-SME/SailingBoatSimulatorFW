@@ -15,6 +15,7 @@ entity Pulse is
         SRst    : in    std_logic := '0';
         En      : in    std_logic := '1';
         Freq    : in    std_logic_vector(N - 1 downto 0);
+        Cnt     : out   std_logic_vector(N downto 0);
         Q       : out   std_logic
     );
 end entity Pulse;
@@ -40,6 +41,7 @@ begin
         end if;
     end process;
     Q <= r(N);
+    Cnt <= r; 
 end architecture rtl;
 
 library IEEE;

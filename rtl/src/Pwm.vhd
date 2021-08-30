@@ -62,7 +62,7 @@ begin
                             when "00" =>
                                 XtrRsp.Dat <= Alpha(7 downto 0);
                             when "01" =>
-                                XtrRsp.Dat <= Alpha(7 downto 0);
+                                XtrRsp.Dat <= Alpha(15 downto 0);
                             when "10" =>
                                 XtrRsp.Dat <= Freq(7 downto 0);
                             when "11" =>
