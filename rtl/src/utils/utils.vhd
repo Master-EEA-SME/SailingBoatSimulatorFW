@@ -23,7 +23,7 @@ package body utils is
     function freq2reg(freq : real; sys_freq : real; N : integer) return std_logic_vector is
         variable ret : std_logic_vector(N - 1 downto 0);
     begin
-        ret := std_logic_vector(to_unsigned(integer(freq * (2.0**16) / sys_freq), N));
+        ret := std_logic_vector(to_unsigned(integer(freq * (2.0**N) / sys_freq), N));
         return ret;
     end function;
 end package body;

@@ -79,7 +79,6 @@ begin
             En      => SpiSs,
             Reg     => tAdcReg,
             RxVld   => SpiSlvRxVld,
-            RxDat   => SpiSlvRxDat,
             TxDat   => SpiSlvTxDat
         );
     process (Clk, ARst)

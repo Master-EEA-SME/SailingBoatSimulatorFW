@@ -7,6 +7,9 @@ library work;
 use work.XtrDef.all;
 
 entity Comm is
+    generic (
+        C_Freq      : integer := 50_000_000
+    );
     port 
     (
         ARst        : in    std_logic := '0';
@@ -18,6 +21,7 @@ entity Comm is
         TxDat       : out   std_logic_vector(7 downto 0);
         TxRdy       : in    std_logic;
         TxBusy      : in    std_logic;
+        XtrRst      : out   std_logic;
         XtrDmaCmd   : out   XtrDmaCmd_t;
         XtrDmaRsp   : in    XtrDmaRsp_t
     );
@@ -35,6 +39,9 @@ architecture rtl of Comm is
     signal vTxVld       : std_logic;
     signal vTxDat       : std_logic_vector(7 downto 0);
     signal SendAck      : std_logic;
+    signal TimeoutRst   : std_logic;
+    signal TimeoutEn    : std_logic;
+    signal TimeoutQ     : std_logic;
 
     attribute mark_debug                : string;
     attribute mark_debug of CurrentST   : signal is "true";
@@ -50,7 +57,7 @@ begin
         if ARst = '1' then
             CurrentST <= ST_IDLE;
         elsif rising_edge(Clk) then
-            if SRst = '1' then
+            if SRst = '1' or TimeoutQ = '1' then
                 CurrentST <= ST_IDLE;
             else
                 case CurrentST is
@@ -249,4 +256,18 @@ begin
     --          '0';
     TxVld <= vTxVld;
     TxDat <= vTxDat;
+    uTimeout : entity work.Timeout
+        generic map (
+            C_FreqIn => C_Freq, C_FreqOut => 10)
+        port map (
+            ARst    => ARst,        Clk => Clk, SRst => TimeoutRst,
+            En      => TimeoutEn,
+            Q       => TimeoutQ);
+    
+    TimeoutRst  <=  '1' when SRst = '1' else
+                    '1' when CurrentST = ST_IDLE else
+                    '0';
+    TimeoutEn   <=  '1' when CurrentST /= ST_IDLE else 
+                    '0';
+    XtrRst      <= TimeoutQ;
 end architecture rtl;

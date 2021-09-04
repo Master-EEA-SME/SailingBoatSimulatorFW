@@ -70,11 +70,13 @@ architecture rtl of Simu is
     signal XtrCmdReg            : XtrCmd_t;
     signal XtrRspReg            : XtrRsp_t;
 -- Network Layer
-    signal XtrDmaCmd            : XtrDmaCmd_t;
-    signal XtrDmaRsp            : XtrDmaRsp_t;
--- Datalink Layer
+    signal DmaRst               : std_logic;
     signal XtrCmd               : XtrCmd_t;
     signal XtrRsp               : XtrRsp_t;
+-- Datalink Layer
+    signal XtrDmaCmd            : XtrDmaCmd_t;
+    signal XtrDmaRsp            : XtrDmaRsp_t;
+    signal XtrRst               : std_logic;
 -- Physical Layer
     signal TxVld                : std_logic;
     signal TxDat                : std_logic_vector(7 downto 0);
@@ -209,21 +211,22 @@ begin
         generic map (
             C_Depth => 16)
         port map (
-            ARst        => ARst,        Clk         => Clk,         SRst => SRst,
+            ARst        => ARst,        Clk         => Clk,         SRst => XtrRst,
             XtrDmaCmd   => XtrDmaCmd,   XtrDmaRsp   => XtrDmaRsp,
             XtrCmd      => XtrCmd,      XtrRsp      => XtrRsp);
+    DmaRst <= SRst or XtrRst;
 -- Data Link Layer
     uComm : entity work.Comm
         port map (
             ARst        => ARst,        Clk         => Clk,             SRst    => SRst,
             RxVld       => RxVld,       RxDat       => RxDat,
             TxVld       => TxVld,       TxDat       => TxDat,           TxRdy   => TxRdy,   TxBusy => TxBusy,
-            XtrDmaCmd   => XtrDmaCmd,   XtrDmaRsp   => XtrDmaRsp);
+            XtrDmaCmd   => XtrDmaCmd,   XtrDmaRsp   => XtrDmaRsp,       XtrRst  => XtrRst);
 
     -- Physical Layer
     uUART : entity work.Uart
         generic map (
-            C_FreqIn    => C_Freq, C_FreqOut   => 4_000_000)
+            C_FreqIn    => C_Freq, C_FreqOut   => 1_000_000)
         port map (
             ARst    => ARst,    Clk     => Clk, SRst => SRst,
             En      => '1',
