@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE pinplan>
+<pinplan intended_family="Cyclone IV E" variation_name="Simulator" megafunction_name="SIMULATOR" specifies="all_ports">
+    <global>
+        <pin name="ARst"            direction="input"   scope="external" source="reset" />
+        <pin name="Clk"             direction="input"   scope="external" source="clock" />
+        <pin name="SRst"            direction="input"   scope="external" />
+        <pin name="AnemoOut"        direction="output"  scope="external" />
+        <pin name="GiroPwm"         direction="output"  scope="external" />
+        <pin name="CapPwm"          direction="output"  scope="external" />
+        <pin name="VerinPwm"        direction="input"   scope="external" />
+        <pin name="VerinSens"       direction="input"   scope="external" />
+        <pin name="VerinAngleSck"   direction="input"   scope="external" />
+        <pin name="VerinAngleMiso"  direction="output"  scope="external" />
+        <pin name="VerinAngleCs_N"  direction="input"   scope="external" />
+        <pin name="BtnBabord"       direction="output"  scope="external" />
+        <pin name="BtnTribord"      direction="output"  scope="external" />
+        <pin name="BtnStandby"      direction="output"  scope="external" />
+        <pin name="LedBabord"       direction="input"   scope="external" />
+        <pin name="LedTribord"      direction="input"   scope="external" />
+        <pin name="LedStandby"      direction="input"   scope="external" />
+        <pin name="Rx"              direction="input"   scope="external" />
+        <pin name="Tx"              direction="output"  scope="external" />
+    </global>
+</pinplan>

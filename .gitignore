@@ -5,6 +5,8 @@
 !*.qsf
 !*.qpf
 !*.xpr
+!*.qip
+!*.ppf
 !*/
 db
 VProj.*/
