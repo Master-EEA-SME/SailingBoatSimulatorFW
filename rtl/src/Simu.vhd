@@ -2,9 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library work;
-use work.XtrDef.all;
-
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 entity Simu is
     generic
     (
@@ -69,7 +69,7 @@ architecture rtl of Simu is
     signal sBtnStandby          : std_logic;
     signal XtrCmdReg            : XtrCmd_t;
     signal XtrRspReg            : XtrRsp_t;
--- Network Layer
+-- NetSim Layer
     signal DmaRst               : std_logic;
     signal XtrCmd               : XtrCmd_t;
     signal XtrRsp               : XtrRsp_t;
@@ -87,30 +87,30 @@ architecture rtl of Simu is
 
 begin
     -- Anemo
-    uAnemoPwm : entity work.XtrPwmMaster
+    uAnemoPwm : XtrPwmMaster
         port map (
             ARst    => ARst,                Clk     => Clk,             SRst => SRst,
             XtrCmd  => XtrCmdAnemoPwm,      XtrRsp  => XtrRspAnemoPwm,
             Q       => AnemoOut);
     -- Girouette
-    uGiroPwm : entity work.XtrPwmMaster
+    uGiroPwm : XtrPwmMaster
         port map (
             ARst      => ARst,              Clk     => Clk,             SRst => SRst,
             XtrCmd    => XtrCmdGiroPwm,     XtrRsp  => XtrRspGiroPwm,
             Q         => GiroPwm);
     -- Cap
-    uCapPwm : entity work.XtrPwmMaster
+    uCapPwm : XtrPwmMaster
         port map (
             ARst      => ARst,              Clk     => Clk,             SRst => SRst,
             XtrCmd    => XtrCmdCapPwm,      XtrRsp  => XtrRspCapPwm,
             Q         => CapPwm);
     -- Verin
-    uVerinPwm : entity work.XtrPwmSlave
+    uVerinPwm : XtrPwmSlave
         port map(
             ARst      => ARst,              Clk     => Clk,             SRst => SRst,
             E         => VerinPwm,
             XtrCmd    => XtrCmdVerinPwm,    XtrRsp => XtrRspVerinPwm);
-    uVerinAngle : entity work.XtrAdc
+    uVerinAngle : XtrAdc
         port map (
             ARst    => ARst,                Clk     => Clk,                 SRst    => SRst,
             XtrCmd  => XtrCmdVerinAnalog,   XtrRsp  => XtrRspVerinAnalog,
@@ -165,7 +165,7 @@ begin
         end if;
     end process;
 
-    uXtrAbrLyr1 : entity work.XtrAbr
+    uXtrAbrLyr1 : XtrAbr
         generic map (
             C_MMSB  => 7, C_MLSB  => 8, C_Slave => 2)
         port map (
@@ -173,7 +173,7 @@ begin
             XtrCmd  => XtrCmd,      XtrRsp  => XtrRsp,
             vXtrCmd => XtrCmdLyr1,  vXtrRsp => XtrRspLyr1);
     
-    uXtrAbrLyr2_1 : entity work.XtrAbr
+    uXtrAbrLyr2_1 : XtrAbr
         generic map (
             C_MMSB  => 7, C_MLSB  => 7, C_MASK => 16#00#, C_Slave => 3)
         port map (
@@ -181,7 +181,7 @@ begin
             XtrCmd  => XtrCmdLyr1(0),   XtrRsp  => XtrRspLyr1(0),
             vXtrCmd => XtrCmdLyr2_1,    vXtrRsp => XtrRspLyr2_1);
 
-    uXtrAbrLyr2_2 : entity work.XtrAbr
+    uXtrAbrLyr2_2 : XtrAbr
         generic map (
             C_MMSB  => 7, C_MLSB  => 7, C_MASK => 16#80#, C_Slave => 3)
         port map (
@@ -207,7 +207,7 @@ begin
     XtrCmdReg           <= XtrCmdLyr2_2(2);
     XtrRspLyr2_2(2)     <= XtrRspReg;
     
-    uDMA : entity work.Dma
+    uDMA : Dma
         generic map (
             C_Depth => 16)
         port map (
@@ -216,7 +216,7 @@ begin
             XtrCmd      => XtrCmd,      XtrRsp      => XtrRsp);
     DmaRst <= SRst or XtrRst;
 -- Data Link Layer
-    uComm : entity work.Comm
+    uComm : Comm
         port map (
             ARst        => ARst,        Clk         => Clk,             SRst    => SRst,
             RxVld       => RxVld,       RxDat       => RxDat,
@@ -224,7 +224,7 @@ begin
             XtrDmaCmd   => XtrDmaCmd,   XtrDmaRsp   => XtrDmaRsp,       XtrRst  => XtrRst);
 
     -- Physical Layer
-    uUART : entity work.Uart
+    uUART : Uart
         generic map (
             C_FreqIn    => C_Freq, C_FreqOut   => 1_000_000)
         port map (

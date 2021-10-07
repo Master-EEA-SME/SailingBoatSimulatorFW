@@ -2,9 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library work;
-use work.XtrDef.all;
-
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 entity XtrPwmMaster is
     port 
     (
@@ -80,7 +80,7 @@ begin
         end if;
     end process;
     XtrRsp.CRDY <= XtrCmd.Stb;
-    uPwm : entity work.PwmMaster
+    uPwm : PwmMaster
         generic map(N => 32)
         port map(ARst => ARst, Clk  => Clk,  SRst => SRst, 
                  En   => '1',  Duty => Duty, Freq => Freq, 

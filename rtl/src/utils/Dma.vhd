@@ -3,9 +3,9 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
 
-library work;
-use work.XtrDef.all;
-
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 entity Dma is
     generic
     (
@@ -165,7 +165,7 @@ begin
     XtrDmaRsp <= vXtrDmaRsp;
 
     
-    uWriteFifo : entity work.Fifo
+    uWriteFifo : Fifo
         generic map 
         (
             C_Depth => C_Depth,
@@ -186,7 +186,7 @@ begin
         );
     wFifoPushEn <= vwFifoPushEn and (not wFifoFFlag);
     wFifoPopEn  <= vwFifoPopEn  and (not wFifoEFlag);
-    uReadFifo : entity work.Fifo
+    uReadFifo : Fifo
         generic map 
         (
             C_Depth => C_Depth,

@@ -2,8 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library work;
-use work.XtrDef.all;
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 
 entity XtrAdc is
     port 
@@ -61,7 +62,7 @@ begin
     XtrRsp.CRDY <= XtrCmd.Stb;
 
     -- SPI SLAVE
-    uSpiSlave : entity work.SpiSlave
+    uSpiSlave : SpiSlave
         port map
         (
             ARst    => ARst,
@@ -78,7 +79,7 @@ begin
         );
     sSs <= Ss;
     -- SPI ADC
-    uSpiAdc : entity work.SpiAdc
+    uSpiAdc : SpiAdc
         port map
         (
             ARst    => ARst,

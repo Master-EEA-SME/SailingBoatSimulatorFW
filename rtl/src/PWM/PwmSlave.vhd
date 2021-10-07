@@ -2,7 +2,8 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
-
+library Sim;
+use Sim.Components.all;
 entity PwmSlave is
     generic
     (
@@ -35,7 +36,7 @@ begin
             sPwm <= E;
         end if;
     end process;
-    EdgeDetector_inst : entity work.EdgeDetector
+    EdgeDetector_inst : EdgeDetector
         generic map(C_ASYNC => False)
         port map(ARst => ARst, Clk => Clk, SRst => SRst,
                  E    => sPwm,    RE  => sPwmRE,  FE   => open);

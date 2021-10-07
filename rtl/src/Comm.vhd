@@ -3,9 +3,9 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
 
-library work;
-use work.XtrDef.all;
-
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 entity Comm is
     generic (
         C_Freq      : integer := 50_000_000
@@ -256,7 +256,7 @@ begin
     --          '0';
     TxVld <= vTxVld;
     TxDat <= vTxDat;
-    uTimeout : entity work.Timeout
+    uTimeout : Timeout
         generic map (
             C_FreqIn => C_Freq, C_FreqOut => 10)
         port map (

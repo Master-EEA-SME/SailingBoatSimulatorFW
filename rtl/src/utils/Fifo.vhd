@@ -3,8 +3,8 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
 
-library work;
-use work.utils.all;
+library Sim;
+use Sim.utils.all;
 
 entity Fifo is
     generic

@@ -45,7 +45,7 @@ begin
     Clk    <= PinClk;
     SRst   <= '0';
 
-    uSimu : entity work.Simu
+    uSimu : entity Sim.Simu
         generic map (
             C_Freq  => 100e6)
         port map (

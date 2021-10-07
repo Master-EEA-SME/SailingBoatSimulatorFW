@@ -2,8 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library work;
-use work.utils.all;
+library Sim;
+use Sim.utils.all;
+use Sim.Components.all;
 
 entity Timeout is
     generic (

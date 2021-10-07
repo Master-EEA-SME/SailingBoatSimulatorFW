@@ -1,7 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
+library Sim;
+use Sim.Components.all;
 entity PwmMaster is
     generic
     (
@@ -30,7 +31,7 @@ architecture rtl of PwmMaster is
     attribute mark_debug of Freq                : signal is "true";
 begin
     
-    uFreqGen : entity work.Pulse
+    uFreqGen : Pulse
         generic map(N => N)
         port map(ARst   => ARst, Clk    => Clk,  SRst => SRst,
                  En     => En,   Freq   => Freq,

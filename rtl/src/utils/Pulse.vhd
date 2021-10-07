@@ -48,6 +48,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
+library Sim;
+use Sim.Components.all;
+
 entity PulseC is
     generic
     (
@@ -70,7 +73,7 @@ architecture rtl of PulseC is
     
 begin
     
-    uPulse : entity work.Pulse
+    uPulse : Pulse
         generic map
         (
             N       => N

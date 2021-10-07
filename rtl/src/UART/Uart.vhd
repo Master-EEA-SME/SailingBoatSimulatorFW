@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+library Sim;
+use Sim.Components.all;
 
 entity Uart is
     generic
@@ -28,7 +30,7 @@ architecture rtl of Uart is
     signal Baud16 : std_logic;
 begin
     
-    uBaud : entity work.PulseC
+    uBaud : PulseC
         generic map
         (
             C_FreqIn    => C_FreqIn, C_FreqOut  => C_FreqOut*16, N    => 16
@@ -40,7 +42,7 @@ begin
             Q       => Baud16
         );
     
-    uUartTx : entity work.UartTx
+    uUartTx : UartTx
         port map
         (
             ARst    => ARst,    Clk     => Clk,     SRst        => SRst,
@@ -48,7 +50,7 @@ begin
             TxEn    => TxVld,   TxDat   => TxDat,   BusyFlag    => TxBusyFlag,
             Tx      => Tx
         );
-    uUartRx : entity work.UartRx
+    uUartRx : UartRx
         port map
         (
             ARst    => ARst,    Clk     => Clk,     SRst    => SRst,

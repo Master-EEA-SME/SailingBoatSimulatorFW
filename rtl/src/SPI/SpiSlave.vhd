@@ -1,7 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
+library Sim;
+use Sim.Components.all;
 entity SpiSlave is
     port 
     (
@@ -50,7 +51,7 @@ begin
             vSs     <= Ss; 
         end if;
     end process;
-    uSckED : entity work.EdgeDetector
+    uSckED : EdgeDetector
         generic map (C_ASYNC => False)
         port map (ARst => ARst, Clk => Clk,   SRst => SRst, 
                   E    => vSck, RE  => vSckRE,FE   => vSckFE);

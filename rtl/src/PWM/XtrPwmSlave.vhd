@@ -2,9 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library work;
-use work.XtrDef.all;
-
+library Sim;
+use Sim.XtrDef.all;
+use Sim.Components.all;
 entity XtrPwmSlave is
     port 
     (
@@ -53,7 +53,7 @@ begin
     end process;
     XtrRsp.CRDY <= XtrCmd.Stb;
 
-    uPwmSlave : entity work.PwmSlave
+    uPwmSlave : PwmSlave
         generic map
         (
             N       => 32
