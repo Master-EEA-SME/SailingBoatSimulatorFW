@@ -7,6 +7,7 @@
 !*.xpr
 !*.qip
 !*.ppf
+!README.md
 !*/
 db
 VProj.*/
