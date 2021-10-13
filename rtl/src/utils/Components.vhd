@@ -8,12 +8,10 @@ use Sim.XtrDef.all;
 package Components is
     
     component Dma is
-        generic
-        (
+        generic (
             C_Depth     : integer := 512
         );
-        port 
-        (
+        port (
             ARst        : in    std_logic := '0';
             Clk         : in    std_logic;
             SRst        : in    std_logic := '0';
@@ -25,12 +23,10 @@ package Components is
     end component;
 
     component EdgeDetector is
-        generic
-        (
+        generic (
             C_ASYNC : boolean := false
         );
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -41,13 +37,11 @@ package Components is
     end component;
 
     component Fifo is
-        generic
-        (
-            C_Depth : integer := 512;
-            C_Width : integer := 16
+        generic (
+            C_Depth     : integer := 512;
+            C_Width     : integer := 16
         );
-        port 
-        (
+        port (
             ARst        : in    std_logic := '0';
             Clk         : in    std_logic;
             SRst        : in    std_logic := '0';
@@ -61,12 +55,10 @@ package Components is
     end component;
 
     component Pulse is
-        generic
-        (
+        generic (
             N       : integer := 16
         );
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -78,14 +70,12 @@ package Components is
     end component;
 
     component PulseC is
-        generic
-        (
+        generic (
             C_FreqIn    : integer := 50_000_000;
             C_FreqOut   : integer := 1_000_000;
             N           : integer := 16
         );
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -109,15 +99,13 @@ package Components is
     end component;
 
     component XtrAbr is
-        generic
-        (
+        generic (
             C_MMSB  : integer := 31;
             C_MLSB  : integer := 16;
             C_MASK  : integer := 16#00000000#;
             C_Slave : integer := 4
         );
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -132,8 +120,7 @@ package Components is
         generic (
             C_Freq      : integer := 50_000_000
         );
-        port 
-        (
+        port (
             ARst        : in    std_logic := '0';
             Clk         : in    std_logic;
             SRst        : in    std_logic := '0';
@@ -150,8 +137,7 @@ package Components is
     end component;
 
     component SpiAdc is
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -163,8 +149,7 @@ package Components is
     end component;
 
     component XtrAdc is
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -178,12 +163,10 @@ package Components is
     end component;
 
     component PwmMaster is
-        generic
-        (
+        generic (
             N   : integer := 16
         );
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -195,12 +178,11 @@ package Components is
     end component;
 
     component PwmSlave is
-        generic
-        (
+        generic (
+            C_Freq  : integer := 50_000_000;
             N       : integer := 16
         );
-        port
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -212,8 +194,7 @@ package Components is
     end component;
 
     component XtrPwmMaster is
-        port 
-        (
+        port (
             ARst    : in    std_logic;
             Clk     : in    std_logic;
             SRst    : in    std_logic;
@@ -224,8 +205,10 @@ package Components is
     end component;
 
     component XtrPwmSlave is
-        port 
-        (
+        generic (
+            C_Freq  : integer := 50_000_000
+        );
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -236,8 +219,7 @@ package Components is
     end component;
 
     component SpiSlave is
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -253,13 +235,11 @@ package Components is
     end component;
 
     component Uart is
-        generic
-        (
+        generic (
             C_FreqIn    : integer := 50_000_000;
             C_FreqOut   : integer := 115_200
         );
-        port 
-        (
+        port (
             ARst        : in    std_logic := '0';
             Clk         : in    std_logic;
             SRst        : in    std_logic := '0';
@@ -275,8 +255,7 @@ package Components is
     end component;
 
     component UartRx is
-        port 
-        (
+        port (
             ARst    : in    std_logic := '0';
             Clk     : in    std_logic;
             SRst    : in    std_logic := '0';
@@ -289,8 +268,7 @@ package Components is
     end component;
 
     component UartTx is
-        port 
-        (
+        port (
             ARst        : in    std_logic := '0';
             Clk         : in    std_logic;
             SRst        : in    std_logic := '0';

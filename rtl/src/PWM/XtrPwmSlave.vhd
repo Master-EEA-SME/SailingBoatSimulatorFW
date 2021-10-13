@@ -6,8 +6,10 @@ library Sim;
 use Sim.XtrDef.all;
 use Sim.Components.all;
 entity XtrPwmSlave is
-    port 
-    (
+    generic (
+        C_Freq  : integer := 50_000_000
+    );
+    port (
         ARst    : in    std_logic := '0';
         Clk     : in    std_logic;
         SRst    : in    std_logic := '0';
@@ -54,8 +56,8 @@ begin
     XtrRsp.CRDY <= XtrCmd.Stb;
 
     uPwmSlave : PwmSlave
-        generic map
-        (
+        generic map (
+            C_Freq  => C_Freq,
             N       => 32
         )
         port map

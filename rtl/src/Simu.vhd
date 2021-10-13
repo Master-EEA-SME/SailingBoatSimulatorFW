@@ -6,8 +6,7 @@ library Sim;
 use Sim.XtrDef.all;
 use Sim.Components.all;
 entity Simu is
-    generic
-    (
+    generic (
         C_Freq          : integer := 50_000_000
     );
     port 
@@ -106,6 +105,9 @@ begin
             Q         => CapPwm);
     -- Verin
     uVerinPwm : XtrPwmSlave
+        generic map (
+            C_Freq    => C_Freq
+        )
         port map(
             ARst      => ARst,              Clk     => Clk,             SRst => SRst,
             E         => VerinPwm,
