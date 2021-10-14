@@ -1,6 +1,6 @@
 # Simulateur
-## Comment l'integrer
-Pour integrer le simulateur à votre projet, vous devez ajouter le fichier **Simulator.qip** qui se trouve dans **rtl** à votre projet.
+## Comment l'intégrer
+Pour intégrer le simulateur à votre projet, vous devez ajouter le fichier **Simulator.qip** qui se trouve dans **rtl** à votre projet.
 
 Vous devez ensuite l'instancier le composant **Simu** du fichier **rtl/Simu.vhd** à votre projet. Ex:
 
